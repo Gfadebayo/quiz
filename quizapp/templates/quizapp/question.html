@@ -1,0 +1,38 @@
+{% extends 'quizapp/base.html' %}
+
+{% block content %}
+
+{% if done %}
+
+  <a href="{% url 'quizapp:result' %}"><button type="button" name="button">Get Results</button></a>
+{% else %}
+
+Question number {{ question_info.question_no }}
+{{ question_info.question.name }}
+
+  <form class="" action="{% if review %}{% url 'quizapp:review' %} {% else %}{% url 'quizapp:question' category_id %}{% endif %}" method="post">
+    {% csrf_token %}
+    
+    <fieldset {% if review %}disabled{% endif %}>
+
+    <ul>
+      {% for option in options %}
+
+    <li>
+    <input id="option-{{option.id}}" type="radio" name="option" value="{{ option.id }}">
+    <label for="option-{{option.id}}">{{ option.name }}</label>
+    </li>
+
+      {% endfor %}
+    </ul>
+
+    </fieldset>
+
+    <input type="submit" name="" value="Next">
+    <input type="hidden" name="question-number" value="{{ question_info.question_no }}">
+  </form>
+  {% endif %}
+
+  {% block review %}
+  {% endblock %}
+{% endblock %}

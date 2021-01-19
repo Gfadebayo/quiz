@@ -1,0 +1,15 @@
+
+{% extends 'quizapp/base.html' %}
+
+{% block content %}
+
+  {% if categories %}
+    {% for category in categories %}
+    <p><a href="{% url 'quizapp:question' category.id %}">{{ category.name }}</a></p>
+    {% endfor %}
+
+    {% else %}
+    No Category available currently
+  {% endif %}
+
+{% endblock %}

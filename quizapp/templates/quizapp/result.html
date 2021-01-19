@@ -1,0 +1,10 @@
+{% extends 'quizapp/base.html' %}
+
+{% block content %}
+
+  You got {{ correct }} out of {{ amount }}
+
+
+  <a href="{% url 'quizapp:review' %}"><button type="button" name="button">Review</button></a>
+
+{% endblock %}
