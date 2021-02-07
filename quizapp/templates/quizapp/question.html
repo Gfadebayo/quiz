@@ -1,4 +1,9 @@
 {% extends 'quizapp/base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'quizapp/question.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -12,7 +17,7 @@ Question number {{ question_info.question_no }}
 
   <form class="" action="{% if review %}{% url 'quizapp:review' %} {% else %}{% url 'quizapp:question' category_id %}{% endif %}" method="post">
     {% csrf_token %}
-    
+
     <fieldset {% if review %}disabled{% endif %}>
 
     <ul>

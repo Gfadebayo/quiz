@@ -3,29 +3,31 @@ import random
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Section, Category, Question, Option, UserQuestion
+from .models import Category, Question, Option, UserQuestion
 from . import utils
 
 # Create your views here.
 
 def home(request):
-    sections = Section.objects.all()
+    sections = Category.objects.all()
 
     return render(request, 'quizapp/index.html', {'sections':sections})
 
-def category(request, section):
-    categories = Category.objects.filter(section__name=section)
-    return render(request, 'quizapp/category.html', {'categories':categories})
+#def category(request, section):
+#    categories = Category.objects.filter(section__name=section)
+#    return render(request, 'quizapp/category.html', {'categories':categories})
 
-def question(request, section_id):
-    context = {'category_id' : section_id}
+def question(request, category_id):
+    context = {'category_id' : category_id}
     question_number = 0
 
-    if request.method == 'GET': [quest.save() for quest in utils.load_questions(section_id)]
+    if request.method == 'GET': [quest.save() for quest in utils.load_questions(category_id)]
 
     if request.method == 'POST':
-        selected_option_id = int(request.POST['option'])
         question_number = int(request.POST['question-number'])
+        #asynchronous
+        #better to use -1 to show it is an unanswered question
+        selected_option_id = int(request.POST.get('option', "-1"))
 
         question_info = UserQuestion.objects.get(question_no=question_number)
         question_info.selected_option_id = selected_option_id
