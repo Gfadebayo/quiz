@@ -1,10 +1,18 @@
 {% extends 'quizapp/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'quizapp/home.css' %}">
+{% endblock %}
 
 {% block content %}
+<h1> Topics </h1>
 
+<ul>
     {% for section in sections %}
-
+    <li>
     <a href="{% url 'quizapp:question' section.id %}">{{ section.name }}</a>
+    </li>
     {% endfor %}
-
+</ul>
 {% endblock %}

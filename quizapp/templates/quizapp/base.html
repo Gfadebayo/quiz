@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title> Einstein's Lost Questions</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'quizapp/global.css' %}">
     {% block head %}{% endblock %}
   </head>
   <body>
 
     <div class="content">
-      {% block content %}
-      {% endblock %}
+      {% block content %}{% endblock %}
     </div>
   </body>
 </html>

@@ -8,12 +8,15 @@
 {% block content %}
 
 {% if done %}
-
   <a href="{% url 'quizapp:result' %}"><button type="button" name="button">Get Results</button></a>
 {% else %}
 
-Question number {{ question_info.question_no }}
+<h3>
+  {{ question_info.question_no }}.
+</h3>
+<p>
 {{ question_info.question.name }}
+</p>
 
   <form class="" action="{% if review %}{% url 'quizapp:review' %} {% else %}{% url 'quizapp:question' category_id %}{% endif %}" method="post">
     {% csrf_token %}
@@ -24,7 +27,7 @@ Question number {{ question_info.question_no }}
       {% for option in options %}
 
     <li>
-    <input id="option-{{option.id}}" type="radio" name="option" value="{{ option.id }}">
+    <input class="option" id="option-{{option.id}}" type="radio" name="option" value="{{ option.id }}">
     <label for="option-{{option.id}}">{{ option.name }}</label>
     </li>
 
@@ -38,6 +41,14 @@ Question number {{ question_info.question_no }}
   </form>
   {% endif %}
 
+  <script type="text/javascript">
+    function radioClicked(id){
+      document.getElementById(id).parentNode.style.color = "yellow";
+    }
+  </script>
+
+
   {% block review %}
   {% endblock %}
+
 {% endblock %}

@@ -1,0 +1,32 @@
+ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    list-style-type: none;
+    color: white;
+    font-size: 22px;
+    border: 3px solid grey;
+    padding: 22px;
+    margin: 0;
+
+    text-transform: uppercase;
+}
+
+li{
+    /* flex: 30px 20px auto; */
+    padding: 4px;
+    border: 3px solid brown;
+    margin-top: 8px;
+    background-color: blue;
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+h1{
+    align-self: center;
+}
